@@ -169,7 +169,36 @@ document.head.appendChild(style);
 
 // Parallax disabled for performance
 
-// Price animation disabled for performance
+// Number counter animation
+function animateValue(element, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const value = Math.floor(progress * (end - start) + start);
+        element.textContent = value.toLocaleString('ru-RU');
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+// Observe price elements and animate when visible
+const priceObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+            entry.target.classList.add('animated');
+            const value = parseInt(entry.target.textContent.replace(/\D/g, ''));
+            entry.target.textContent = '0';
+            animateValue(entry.target, 0, value, 2000);
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.price-value, .price').forEach(el => {
+    priceObserver.observe(el);
+});
 
 // Loading animation
 window.addEventListener('load', () => {
