@@ -191,7 +191,7 @@ const priceObserver = new IntersectionObserver((entries) => {
             entry.target.classList.add('animated');
             const value = parseInt(entry.target.textContent.replace(/\D/g, ''));
             entry.target.textContent = '0';
-            animateValue(entry.target, 0, value, 2000);
+            animateValue(entry.target, 0, value, 1500);
         }
     });
 }, { threshold: 0.5 });
