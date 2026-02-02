@@ -153,6 +153,7 @@ body {
     justify-content: center;
     position: relative;
     text-align: center;
+    z-index: 1;
 }
 
 .hero-content {
@@ -325,15 +326,15 @@ body {
 }
 
 /* Benefits Section */
+.benefits {
+    margin-top: 0;
+    padding-top: 80px;
+}
+
 .main-benefit {
     padding: 60px;
     text-align: center;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    transform: none !important;
-}
-
-.main-benefit::before {
-    display: none;
 }
 
 /* Features Grid */
