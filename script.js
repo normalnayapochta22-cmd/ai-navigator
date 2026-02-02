@@ -1,130 +1,5 @@
-// Ultra-Modern AI Navigator - Interactive JavaScript
-
-// Particles Animation
-class ParticlesBackground {
-    constructor(canvas) {
-        this.canvas = canvas;
-        this.ctx = canvas.getContext('2d');
-        this.particles = [];
-        this.mouse = { x: null, y: null, radius: 150 };
-
-        this.init();
-        this.animate();
-        this.setupEventListeners();
-    }
-
-    init() {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
-
-        const numberOfParticles = Math.floor((this.canvas.width * this.canvas.height) / 9000);
-
-        for (let i = 0; i < numberOfParticles; i++) {
-            const x = Math.random() * this.canvas.width;
-            const y = Math.random() * this.canvas.height;
-            const directionX = (Math.random() * 0.4) - 0.2;
-            const directionY = (Math.random() * 0.4) - 0.2;
-            const size = Math.random() * 2 + 1;
-
-            this.particles.push(new Particle(x, y, directionX, directionY, size, this.canvas));
-        }
-    }
-
-    animate() {
-        requestAnimationFrame(() => this.animate());
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-        for (let particle of this.particles) {
-            particle.update();
-            particle.draw(this.ctx);
-        }
-
-        this.connect();
-    }
-
-    connect() {
-        for (let a = 0; a < this.particles.length; a++) {
-            for (let b = a; b < this.particles.length; b++) {
-                const dx = this.particles[a].x - this.particles[b].x;
-                const dy = this.particles[a].y - this.particles[b].y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < 120) {
-                    const opacity = 1 - (distance / 120);
-                    this.ctx.strokeStyle = `rgba(102, 126, 234, ${opacity * 0.2})`;
-                    this.ctx.lineWidth = 1;
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(this.particles[a].x, this.particles[a].y);
-                    this.ctx.lineTo(this.particles[b].x, this.particles[b].y);
-                    this.ctx.stroke();
-                }
-            }
-        }
-    }
-
-    setupEventListeners() {
-        window.addEventListener('resize', () => {
-            this.canvas.width = window.innerWidth;
-            this.canvas.height = window.innerHeight;
-            this.particles = [];
-            this.init();
-        });
-
-        window.addEventListener('mousemove', (event) => {
-            this.mouse.x = event.x;
-            this.mouse.y = event.y;
-        });
-
-        window.addEventListener('mouseout', () => {
-            this.mouse.x = null;
-            this.mouse.y = null;
-        });
-    }
-}
-
-class Particle {
-    constructor(x, y, directionX, directionY, size, canvas) {
-        this.x = x;
-        this.y = y;
-        this.directionX = directionX;
-        this.directionY = directionY;
-        this.size = size;
-        this.canvas = canvas;
-        this.baseX = x;
-        this.baseY = y;
-    }
-
-    draw(ctx) {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(168, 85, 247, 0.8)';
-        ctx.fill();
-
-        // Glow effect
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = 'rgba(168, 85, 247, 0.5)';
-    }
-
-    update() {
-        // Check if particle is out of bounds
-        if (this.x + this.size > this.canvas.width || this.x - this.size < 0) {
-            this.directionX = -this.directionX;
-        }
-        if (this.y + this.size > this.canvas.height || this.y - this.size < 0) {
-            this.directionY = -this.directionY;
-        }
-
-        // Move particle
-        this.x += this.directionX;
-        this.y += this.directionY;
-    }
-}
-
-// Initialize particles
-const canvas = document.getElementById('particles-canvas');
-if (canvas) {
-    new ParticlesBackground(canvas);
-}
+// Ultra-Modern AI Navigator - Lightweight JavaScript
+// Particles animation disabled for performance
 
 // Scroll-based animations (AOS-like)
 class ScrollAnimations {
@@ -292,46 +167,9 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Parallax effect for hero section
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero-content');
-    if (hero && scrolled < window.innerHeight) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-        hero.style.opacity = 1 - (scrolled / window.innerHeight) * 0.8;
-    }
-});
+// Parallax disabled for performance
 
-// Number counter animation
-function animateValue(element, start, end, duration) {
-    let startTimestamp = null;
-    const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        const value = Math.floor(progress * (end - start) + start);
-        element.textContent = value.toLocaleString('ru-RU');
-        if (progress < 1) {
-            window.requestAnimationFrame(step);
-        }
-    };
-    window.requestAnimationFrame(step);
-}
-
-// Observe price elements and animate when visible
-const priceObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
-            entry.target.classList.add('animated');
-            const value = parseInt(entry.target.textContent.replace(/\D/g, ''));
-            entry.target.textContent = '0';
-            animateValue(entry.target, 0, value, 2000);
-        }
-    });
-}, { threshold: 0.5 });
-
-document.querySelectorAll('.price-value, .price').forEach(el => {
-    priceObserver.observe(el);
-});
+// Price animation disabled for performance
 
 // Loading animation
 window.addEventListener('load', () => {
@@ -365,26 +203,4 @@ document.querySelectorAll('img').forEach(img => {
 
 // Tilt effect disabled for performance
 
-// Scroll progress indicator (optional)
-const createScrollProgress = () => {
-    const progressBar = document.createElement('div');
-    progressBar.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 0%;
-        height: 3px;
-        background: linear-gradient(90deg, #667eea, #764ba2);
-        z-index: 10000;
-        transition: width 0.1s ease;
-    `;
-    document.body.appendChild(progressBar);
-
-    window.addEventListener('scroll', () => {
-        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (window.pageYOffset / windowHeight) * 100;
-        progressBar.style.width = scrolled + '%';
-    });
-};
-
-createScrollProgress();
+// Scroll progress disabled for performance
