@@ -217,10 +217,7 @@ body {
 
 .neon-text {
     color: var(--neon-blue);
-    text-shadow:
-        0 0 10px var(--neon-blue),
-        0 0 20px var(--neon-blue),
-        0 0 40px var(--neon-blue);
+    text-shadow: 0 0 10px rgba(0, 217, 255, 0.4);
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
@@ -350,6 +347,11 @@ body {
     padding: 60px;
     text-align: center;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    transform: none !important;
+}
+
+.main-benefit::before {
+    display: none;
 }
 
 /* Features Grid */
@@ -754,16 +756,6 @@ body {
     width: 60px;
     height: 2px;
     background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue));
-    position: relative;
-}
-
-.step-connector::after {
-    content: '→';
-    position: absolute;
-    right: -15px;
-    top: -12px;
-    color: var(--neon-blue);
-    font-size: 1.5rem;
 }
 
 .result-box {
@@ -949,10 +941,6 @@ body {
     .step-connector {
         transform: rotate(90deg);
         margin: 20px 0;
-    }
-
-    .step-connector::after {
-        transform: rotate(90deg);
     }
 
     .price-options,
