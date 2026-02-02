@@ -35,7 +35,7 @@ class ParticlesBackground {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         for (let particle of this.particles) {
-            particle.update(this.mouse);
+            particle.update();
             particle.draw(this.ctx);
         }
 
@@ -105,7 +105,7 @@ class Particle {
         ctx.shadowColor = 'rgba(168, 85, 247, 0.5)';
     }
 
-    update(mouse) {
+    update() {
         // Check if particle is out of bounds
         if (this.x + this.size > this.canvas.width || this.x - this.size < 0) {
             this.directionX = -this.directionX;
@@ -117,28 +117,6 @@ class Particle {
         // Move particle
         this.x += this.directionX;
         this.y += this.directionY;
-
-        // Mouse interaction
-        if (mouse.x != null && mouse.y != null) {
-            const dx = mouse.x - this.x;
-            const dy = mouse.y - this.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-
-            if (distance < mouse.radius) {
-                if (mouse.x < this.x && this.x < this.canvas.width - this.size * 10) {
-                    this.x += 2;
-                }
-                if (mouse.x > this.x && this.x > this.size * 10) {
-                    this.x -= 2;
-                }
-                if (mouse.y < this.y && this.y < this.canvas.height - this.size * 10) {
-                    this.y += 2;
-                }
-                if (mouse.y > this.y && this.y > this.size * 10) {
-                    this.y -= 2;
-                }
-            }
-        }
     }
 }
 
@@ -272,10 +250,7 @@ class CustomCursor {
     }
 }
 
-// Initialize custom cursor on desktop only
-if (window.innerWidth > 768) {
-    new CustomCursor();
-}
+// Custom cursor disabled for performance
 
 // Button ripple effect
 document.querySelectorAll('.glow-button').forEach(button => {
