@@ -276,6 +276,32 @@ body {
     display: none;
 }
 
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-button-secondary {
+    display: inline-block;
+    padding: 18px 45px;
+    background: transparent;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border: 2px solid var(--neon-purple);
+    transition: all 0.3s ease;
+}
+
+.cta-button-secondary:hover {
+    background: rgba(139, 92, 246, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+}
+
 /* Scroll Indicator */
 .scroll-indicator {
     position: absolute;
