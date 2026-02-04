@@ -538,6 +538,51 @@ body {
     flex: 1;
 }
 
+/* Program Section */
+.program-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+}
+
+.program-bonuses {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 4rem;
+}
+
+.bonus-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 25px;
+    transition: all 0.3s ease;
+}
+
+.bonus-item:hover {
+    border-color: var(--neon-purple);
+    transform: translateY(-3px);
+}
+
+.bonus-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.bonus-content h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.bonus-content p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
 /* Schedule Grid */
 .schedule-grid {
     display: grid;
@@ -602,6 +647,20 @@ body {
     flex: 1;
     font-size: 1rem;
     line-height: 1.6;
+}
+
+.lesson-card.empty {
+    opacity: 0.6;
+    border-style: dashed;
+}
+
+.lesson-card.empty p {
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.lesson-card.empty .lesson-number {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(6, 182, 212, 0.3));
 }
 
 /* Experts Section */
@@ -944,7 +1003,8 @@ body {
         grid-template-columns: 1fr;
     }
 
-    .features-grid {
+    .features-grid,
+    .program-bonuses {
         grid-template-columns: 1fr;
     }
 
